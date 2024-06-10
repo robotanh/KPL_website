@@ -1,0 +1,16 @@
+{
+    "firebase": {
+      "apiKey": "AIzaSyBVhejjvjZxJecode4BT54ft7fI5UJeV4c",
+      "authDomain": "kpl-gaspump-realtime.firebaseapp.com",
+      "databaseURL": "https://kpl-gaspump-realtime-default-rtdb.asia-southeast1.firebasedatabase.app",
+      "projectId": "kpl-gaspump-realtime",
+      "storageBucket": "kpl-gaspump-realtime.appspot.com",
+      "messagingSenderId": "399289073820",
+      "appId": "1:399289073820:web:bf5b634447ea1396666d59",
+      "measurementId": "G-QGDGK42M3R"
+    },
+    "path":[
+        "gas_pump_data/Voi_1/raw_data"
+    ]
+  }
+  

@@ -7,7 +7,14 @@ import
  from 'recharts';
 
 function Home() {
-
+    // const [config, setConfig] = useState(null);
+    // useEffect(() => {
+    //   fetch('/firebaseConfig.json') // Assuming you have a firebaseConfig.json file for Firebase configuration
+    //     .then((response) => response.json())
+    //     .then((data) => setConfig(data))
+    //     .catch((error) => console.error('Error loading configuration:', error));
+    // }, []);
+  
     const data = [
         {
           name: 'Page A',
