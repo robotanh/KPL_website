@@ -1,12 +1,9 @@
-import { useState } from 'react'
-import React from 'react';
-import './styles/App.css'
-import Header from './Header'
-import Sidebar from './Sidebar'
-import Home from './Home'
-import Login from './login_logout_components/Login'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ReactDOM from 'react-dom/client';
+import { useState } from 'react';
+import './styles/App.css';
+import Header from './Header';
+import Sidebar from './Sidebar';
+import Home from './Home';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
@@ -16,16 +13,16 @@ function App() {
   };
 
   return (
-      <React.StrictMode>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/dashboard" element={<Home />} />
-          </Routes>
-        </Router>
-      </React.StrictMode>
-    
+    <div className='grid-container'>
+      <Header OpenSidebar={OpenSidebar} />
+      <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
+      <main>
+        <Routes>
+          <Route path="/dashboard" element={<Home />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 
-export default App
+export default App;

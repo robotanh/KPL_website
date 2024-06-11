@@ -22,7 +22,7 @@ const Login = observer(() => {
 
   
   if (UserStore.isLoggedIn) {
-    navigate('/dashboard');
+    navigate('/app');
     return null;  // Return null to avoid rendering the component
   }
 
