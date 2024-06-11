@@ -1,4 +1,3 @@
-Sure, here's a detailed README for your web app:
 
 ---
 
@@ -24,7 +23,7 @@ This web app is designed to display real-time data from a Firebase Realtime Data
 1. **Clone the repository**:
    ```sh
    git clone https://github.com/robotanh/KPL_website
-   cd KPL_DASHBOARD
+   cd KPL_website
    ```
 
 2. **Install dependencies**:

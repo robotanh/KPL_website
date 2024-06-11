@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill } from 'react-icons/bs';
+import { FaGasPump } from "react-icons/fa6";
+import { PiIdentificationCard , PiMoneyWavy  } from "react-icons/pi";
+import { SiRainmeter } from "react-icons/si";
 import { initializeApp } from 'firebase/app';
 import {
   LineChart,
@@ -17,7 +19,9 @@ function Home() {
   const [config, setConfig] = useState(null);
   const [sensorData, setSensorData] = useState({});
   const [signal, setSignal] = useState('STOP'); // Initial value is 'STOP'
-  const [idvoi, setIdvoi] = useState('');; 
+  const [idvoi, setIdvoi] = useState('');
+  const [TienDangBan, setTienDangBan] = useState('');
+  const [SoLitDaBom, setSoLitDaBom] = useState(''); 
 
   useEffect(() => {
     fetch('/firebaseConfig.json') // Assuming you have a firebaseConfig.json file for Firebase configuration
@@ -53,6 +57,8 @@ function Home() {
             setSignal('RUN');
           }
           setIdvoi(parsedData.id_voi);
+          setSoLitDaBom(parsedData.so_lit_da_bom_rt);
+          setTienDangBan(parsedData.tien_dang_ban_rt);
         });
       });
     }
@@ -82,29 +88,29 @@ function Home() {
       <div className='main-cards'>
         <div className='card'>
           <div className='card-inner'>
-            <h3>PRODUCTS</h3>
-            <BsFillArchiveFill className='card_icon' />
+            <h3>Tiền</h3>
+            <PiMoneyWavy className='card_icon' />
           </div>
-          <h1>300</h1>
+          <h3>{TienDangBan}</h3>
         </div>
         <div className='card'>
           <div className='card-inner'>
-            <h3>CATEGORIES</h3>
-            <BsFillGrid3X3GapFill className='card_icon' />
+            <h3>Lít xăng</h3>
+            <SiRainmeter className='card_icon' />
           </div>
-          <h1>12</h1>
+          <h3>{SoLitDaBom}</h3>
         </div>
         <div className='card'>
           <div className='card-inner'>
-            <h3>ID Gaspump</h3>
-            <BsPeopleFill className='card_icon' />
+            <h3>ID Vòi</h3>
+            <PiIdentificationCard className='card_icon' />
           </div>
           <h3>{idvoi}</h3>
         </div>
         <div className='card'>
           <div className='card-inner'>
-            <h3>Status</h3>
-            <BsFillBellFill className='card_icon' />
+            <h3>Trạng Thái</h3>
+            <FaGasPump className='card_icon' />
           </div>
           <h3>{signal}</h3>
         </div>

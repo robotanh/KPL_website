@@ -18,39 +18,30 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
         <ul className='sidebar-list'>
             <li className='sidebar-list-item'>
                 <Link to="/dashboard">
-                    <BsGrid1X2Fill className='icon' /> Dashboard
+                    <BsGrid1X2Fill className='icon' /> Bảng điều khiển
                 </Link>
             </li>
             <li className='sidebar-list-item'>
                 <a href="">
-                    <BsFillArchiveFill className='icon'/> Products
+                    <BsFillArchiveFill className='icon'/> Truy xuất dữ liệu
                 </a>
             </li>
             <li className='sidebar-list-item'>
                 <a href="">
-                    <BsFillGrid3X3GapFill className='icon'/> Categories
+                    <BsFillGrid3X3GapFill className='icon'/> Hướng dẫn sử dụng 
                 </a>
             </li>
             <li className='sidebar-list-item'>
                 <a href="">
-                    <BsPeopleFill className='icon'/> Customers
+                    <BsPeopleFill className='icon'/> Hỗ trợ khách hàng
                 </a>
             </li>
             <li className='sidebar-list-item'>
                 <a href="">
-                    <BsListCheck className='icon'/> Inventory
+                    <BsFillGearFill className='icon'/> Cài đặt
                 </a>
             </li>
-            <li className='sidebar-list-item'>
-                <a href="">
-                    <BsMenuButtonWideFill className='icon'/> Reports
-                </a>
-            </li>
-            <li className='sidebar-list-item'>
-                <a href="">
-                    <BsFillGearFill className='icon'/> Setting
-                </a>
-            </li>
+            
         </ul>
     </aside>
   )
