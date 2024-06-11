@@ -15,6 +15,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+
 function Home() {
   const [config, setConfig] = useState(null);
   const [sensorData, setSensorData] = useState({
@@ -88,6 +89,7 @@ function Home() {
       <div className='main-title'>
         <h3>DASHBOARD</h3>
       </div>
+
 
       <div className='main-cards'>
         <div className='card'>
