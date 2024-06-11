@@ -14,6 +14,9 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
+import SubmitButton from './login_logout_components/SubmitButton';
+import Logout from './login_logout_components/Logout';
+
 
 function Home() {
   const [config, setConfig] = useState(null);
@@ -84,6 +87,17 @@ function Home() {
       <div className='main-title'>
         <h3>DASHBOARD</h3>
       </div>
+
+      {/* LOGOUT BUTTON */}
+      <div className='logout-btn'>
+        <SubmitButton
+          className="log-out-btn"
+          text={'Log out'}
+          disabled={false}
+          onClick={Logout}
+        />
+      </div>
+
 
       <div className='main-cards'>
         <div className='card'>
