@@ -1,9 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #1d2634;
-  color: #9e9ea4;
+  background: linear-gradient(135deg, #1c1c1c 0%, #2c2c2c 100%);
+  color: #e0c97f; /* Lighter gold text */
   font-family: 'Montserrat', sans-serif;
+  overflow-y: auto; /* Allow scrolling */
 }
 
 .icon {
@@ -11,13 +12,17 @@ body {
   line-height: 1px;
   font-size: 20px;
 }
+
 .icon_header {
   vertical-align: middle;
   line-height: 1px;
   font-size: 26px;
 }
-.icon, .icon_header {
+
+.icon,
+.icon_header {
   margin-right: 5px;
+  color: #e0c97f; /* Lighter gold icons */
 }
 
 .close_icon {
@@ -30,34 +35,38 @@ body {
 .grid-container {
   display: grid;
   grid-template-columns: 260px 1fr 1fr 1fr;
-  grid-template-rows: 0.2fr 3fr;
+  grid-template-rows: auto 1fr; /* Allow the main area to grow */
   grid-template-areas:
     'sidebar header header header'
     'sidebar main main main';
   height: 100vh;
+  overflow-y: auto; /* Allow scrolling */
 }
 
-/* Header  */
+/* Header */
 .header {
   grid-area: header;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px 0 30px;
+  padding: 0 30px;
   box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(135deg, #333333 0%, #444444 100%); /* Gradient header background */
+  color: #e0c97f; /* Lighter gold text */
 }
 
 .menu-icon {
   display: none;
 }
-/* End Header  */
 
-/* Sidebar  */
+/* End Header */
+
+/* Sidebar */
 #sidebar {
   grid-area: sidebar;
   height: 100%;
-  background-color: #263043;
+  background: linear-gradient(135deg, #222222 0%, #333333 100%); /* Gradient sidebar background */
   overflow-y: auto;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
@@ -69,6 +78,7 @@ body {
   align-items: center;
   padding: 15px 30px 0px 30px;
   margin-bottom: 30px;
+  color: #e0c97f; /* Lighter gold text */
 }
 
 .sidebar-title > span {
@@ -79,6 +89,7 @@ body {
   margin-top: 15px;
   font-size: 20px;
   font-weight: 700;
+  color: #e0c97f; /* Lighter gold text */
 }
 
 .sidebar-list {
@@ -87,18 +98,19 @@ body {
 }
 
 .sidebar-list-item {
-  padding: 20px 20px 20px 20px;
+  padding: 20px;
   font-size: 18px;
+  color: #e0c97f; /* Lighter gold text */
 }
 
 .sidebar-list-item:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
   cursor: pointer;
 }
 
 .sidebar-list-item > a {
   text-decoration: none;
-  color: #9e9ea4;
+  color: #e0c97f; /* Lighter gold text */
 }
 
 .sidebar-responsive {
@@ -112,20 +124,20 @@ body {
   z-index: 12 !important;
 }
 
-/* End Sidebar  */
+/* End Sidebar */
 
-
-/* Main  */  
+/* Main */
 .main-container {
   grid-area: main;
-  overflow-y: auto;
-  padding: 20px 20px;
-  color: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  color: #e0c97f; /* Lighter gold text */
+  overflow-y: auto; /* Ensure the main container can scroll */
 }
 
 .main-title {
   display: flex;
   justify-content: space-between;
+  color: #e0c97f; /* Lighter gold text */
 }
 
 .main-cards {
@@ -141,22 +153,8 @@ body {
   justify-content: space-around;
   padding: 8px 15px;
   border-radius: 5px;
-}
-
-.card:first-child {
-  background-color: #2962ff;
-}
-
-.card:nth-child(2) {
-  background-color: #ff6d00;
-}
-
-.card:nth-child(3) {
-  background-color: #2e7d32;
-}
-
-.card:nth-child(4) {
-  background-color: #d50000;
+  color: #1a1a1a; /* Dark text for card content */
+  background: linear-gradient(135deg, #b8860b 0%, #e0c97f 100%); /* Gradient card background */
 }
 
 .card-inner {
@@ -174,18 +172,15 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-top: 60px;
-  height: 300px;
 }
 
-/* End Main  */
-
+/* End Main */
 
 /* Medium <= 992px */
-  
 @media screen and (max-width: 992px) {
   .grid-container {
     grid-template-columns: 1fr;
-    grid-template-rows: 0.2fr 3fr;
+    grid-template-rows: auto 1fr;
     grid-template-areas:
       'header'
       'main';
@@ -203,8 +198,8 @@ body {
     display: inline;
   }
 }
+
 /* Small <= 768px */
-  
 @media screen and (max-width: 768px) {
   .main-cards {
     grid-template-columns: 1fr;
@@ -219,9 +214,8 @@ body {
 }
 
 /* Extra Small <= 576px */
-
 @media screen and (max-width: 576px) {
-  .hedaer-left {
+  .header-left {
     display: none;
   }
 }

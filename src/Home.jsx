@@ -17,6 +17,7 @@ function Home() {
   const [config, setConfig] = useState(null);
   const [sensorData, setSensorData] = useState({});
   const [signal, setSignal] = useState('STOP'); // Initial value is 'STOP'
+  const [idvoi, setIdvoi] = useState('');; 
 
   useEffect(() => {
     fetch('/firebaseConfig.json') // Assuming you have a firebaseConfig.json file for Firebase configuration
@@ -49,7 +50,9 @@ function Home() {
           if (parsedData.so_lit_da_bom_rt === 0) {
             setSignal('STOP');
           } else {
-            setSignal('RUN');}
+            setSignal('RUN');
+          }
+          setIdvoi(parsedData.id_voi);
         });
       });
     }
@@ -61,8 +64,9 @@ function Home() {
   const parseSensorData = (message) => {
     const so_lit_da_bom_rt = parseFloat(message.substring(10, 19).trim());
     const tien_dang_ban_rt = parseFloat(message.substring(34, 43).trim());
+    const id_voi = message.charCodeAt(3); // Get the byte 3 as char code
 
-    return { so_lit_da_bom_rt, tien_dang_ban_rt };
+    return { so_lit_da_bom_rt, tien_dang_ban_rt, id_voi };
   };
 
   useEffect(() => {
@@ -92,41 +96,37 @@ function Home() {
         </div>
         <div className='card'>
           <div className='card-inner'>
-            <h3>CUSTOMERS</h3>
+            <h3>ID Gaspump</h3>
             <BsPeopleFill className='card_icon' />
           </div>
-          <h1>33</h1>
+          <h3>{idvoi}</h3>
         </div>
         <div className='card'>
           <div className='card-inner'>
-            <h3>ALERTS</h3>
+            <h3>Status</h3>
             <BsFillBellFill className='card_icon' />
           </div>
           <h3>{signal}</h3>
         </div>
       </div>
 
-      <div className='charts'>
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart width={500}
-                    height={300}
-                    margin={{
-                      top: 5,
-                      right: 30,
-                      left: 20,
-                      bottom: 5,
-                    }}
-                    data={sensorData[config?.path[0]]}>
 
+      <div className='charts'>
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart data={sensorData[config?.path[0]]}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="x" />
-            <YAxis yAxisId="so_lit_da_bom_rt" label={{ value: 'Lít', angle: -90, position: 'insideLeft' }} />
+            <XAxis
+              dataKey="x"
+              tickFormatter={(tick) => new Date(tick).toLocaleDateString()}
+              label={{ value: 'Date', position: 'insideBottomRight', offset: -5 }}
+            />
+            <YAxis yAxisId="left" label={{ value: 'Lít', angle: -90, position: 'insideLeft' }} />
             <Tooltip
           formatter={(value, name, props) => [`${value} Lít`, new Date(props.payload.x).toLocaleString()]} // Displaying the value and date
         />
             <Legend />
             <Line
-              yAxisId="so_lit_da_bom_rt"
+              yAxisId="left"
               type="monotone"
               dataKey="so_lit_da_bom_rt"
               name="Số lít đã bơm"
@@ -138,25 +138,21 @@ function Home() {
           </LineChart>
         </ResponsiveContainer>
 
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart width={500}
-                      height={300}
-                      margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                      }}
-                      data={sensorData[config?.path[0]]}>
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart data={sensorData[config?.path[0]]}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="x" />
-            <YAxis yAxisId="tien_dang_ban_rt" label={{ value: 'Đồng', angle: -90, position: 'insideLeft' }} />
+            <XAxis
+              dataKey="x"
+              tickFormatter={(tick) => new Date(tick).toLocaleDateString()}
+              label={{ value: 'Date', position: 'insideBottomRight', offset: -5 }}
+            />
+            <YAxis yAxisId="left" label={{ value: 'Đồng', angle: -90, position: 'insideLeft' }} />
             <Tooltip
           formatter={(value, name, props) => [`${value} Lít`, new Date(props.payload.x).toLocaleString()]} // Displaying the value and date
         />
             <Legend />
             <Line
-              yAxisId="tien_dang_ban_rt"
+              yAxisId="left"
               type="monotone"
               dataKey="tien_dang_ban_rt"
               name="Tiền Đang Bán"
@@ -167,6 +163,7 @@ function Home() {
             />
           </LineChart>
         </ResponsiveContainer>
+        
       </div>
     </main>
   );
