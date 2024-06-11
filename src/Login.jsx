@@ -11,9 +11,9 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     // Add your authentication logic here
-    if (username == "admin" &&password == 12345 ){navigate('/app');}
+    if (username == "admin" &&password == 12345 ){navigate('/dashboard');}
     // If authentication is successful, redirect to the App
-    else navigate('/app');
+    else navigate('/dashboard');
   };
 
   return (
