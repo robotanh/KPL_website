@@ -17,7 +17,11 @@ import {
 
 function Home() {
   const [config, setConfig] = useState(null);
-  const [sensorData, setSensorData] = useState({});
+  const [sensorData, setSensorData] = useState({
+    'gas_pump_data/Voi_1/raw_data': [
+      { x: new Date().toLocaleDateString(), so_lit_da_bom_rt: 0, tien_dang_ban_rt: 0 }
+    ]
+  });
   const [signal, setSignal] = useState('STOP'); // Initial value is 'STOP'
   const [idvoi, setIdvoi] = useState('');
   const [TienDangBan, setTienDangBan] = useState('');
@@ -119,7 +123,7 @@ function Home() {
 
       <div className='charts'>
         <ResponsiveContainer width="100%" height={400}>
-          <LineChart data={sensorData[config?.path[0]]}>
+          <LineChart data={sensorData[config?.path[0]] || []}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="x"
@@ -128,8 +132,8 @@ function Home() {
             />
             <YAxis yAxisId="left" label={{ value: 'Lít', angle: -90, position: 'insideLeft' }} />
             <Tooltip
-          formatter={(value, name, props) => [`${value} Lít`, new Date(props.payload.x).toLocaleString()]} // Displaying the value and date
-        />
+              formatter={(value, name, props) => [`${value} Lít`, new Date(props.payload.x).toLocaleString()]} // Displaying the value and date
+            />
             <Legend />
             <Line
               yAxisId="left"
@@ -145,7 +149,7 @@ function Home() {
         </ResponsiveContainer>
 
         <ResponsiveContainer width="100%" height={400}>
-          <LineChart data={sensorData[config?.path[0]]}>
+          <LineChart data={sensorData[config?.path[0]] || []}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="x"
@@ -154,8 +158,8 @@ function Home() {
             />
             <YAxis yAxisId="left" label={{ value: 'Đồng', angle: -90, position: 'insideLeft' }} />
             <Tooltip
-          formatter={(value, name, props) => [`${value} Lít`, new Date(props.payload.x).toLocaleString()]} // Displaying the value and date
-        />
+              formatter={(value, name, props) => [`${value} Đồng`, new Date(props.payload.x).toLocaleString()]} // Displaying the value and date
+            />
             <Legend />
             <Line
               yAxisId="left"
@@ -169,7 +173,6 @@ function Home() {
             />
           </LineChart>
         </ResponsiveContainer>
-        
       </div>
     </main>
   );
