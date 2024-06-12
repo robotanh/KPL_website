@@ -15,7 +15,8 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
-function Home() {
+
+function RT_Dashboard() {
   const [config, setConfig] = useState(null);
   const [sensorData, setSensorData] = useState({});
   const [latestData, setLatestData] = useState({});
@@ -165,4 +166,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default RT_Dashboard;
