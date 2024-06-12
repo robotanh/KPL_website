@@ -1,0 +1,17 @@
+/* Hist_data.css */
+.hist-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+.hist-table th, .data-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+.hist-table th {
+    background-color: #f2f2f2;
+}

@@ -1,10 +1,13 @@
 const express = require('express');
-const app = express();
 const path = require('path');
 const mysql = require('mysql');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const Router = require("./Router.cjs");
+const cors = require('cors')
+
+
+const app = express();
 
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.json());
@@ -45,6 +48,21 @@ new Router(app, db);
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    return res.json("From backend")
 });
+
+
+app.get('/app/hist_data', (req, res) => {
+    const query = 'SELECT * FROM gaspump_hist';
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching data: ', err);
+            res.status(500).send('Internal Server Error');
+        } else {
+            res.json(results);
+        }
+    });
+});
+
 
 app.listen(3000);
