@@ -24,16 +24,22 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
       </div>
 
       <ul className='sidebar-list'>
+
+        {/* DASHBOARD */}
         <li className='sidebar-list-item'>
           <Link to="/app/dashboard">
             <BsGrid1X2Fill className='icon' /> Bảng điều khiển
           </Link>
         </li>
+
+        {/* HISTORICAL DATA */}
         <li className='sidebar-list-item'>
-          <a href="">
+          <Link to="/app/hist_data">
             <BsFillArchiveFill className='icon' /> Truy xuất dữ liệu
-          </a>
+          </Link>
         </li>
+
+
         <li className='sidebar-list-item'>
           <a href="">
             <BsFillGrid3X3GapFill className='icon' /> Hướng dẫn sử dụng
