@@ -53,8 +53,28 @@ app.get('/', function (req, res) {
 
 
 app.get('/app/hist_data', (req, res) => {
-    const query = 'SELECT * FROM gaspump_hist';
-    db.query(query, (err, results) => {
+    const { id_voi, start_time, end_time } = req.query;
+    let query = 'SELECT id_voi, ma_lan_bom, thoi_gian, gia_ban, tong_da_bom, tien_ban FROM gaspump_hist WHERE 1=1';
+    const params = [];
+    
+    if (id_voi) {
+        query += ' AND id_voi = ?';
+        params.push(id_voi);
+    }
+    
+    if (start_time) {
+        query += ' AND thoi_gian >= ?';
+        params.push(start_time);
+    }
+    
+    if (end_time) {
+        query += ' AND thoi_gian <= ?';
+        params.push(end_time);
+    }
+    
+    query += ' ORDER BY thoi_gian ASC';
+    
+    db.query(query, params, (err, results) => {
         if (err) {
             console.error('Error fetching data: ', err);
             res.status(500).send('Internal Server Error');
@@ -63,6 +83,9 @@ app.get('/app/hist_data', (req, res) => {
         }
     });
 });
+
+
+
 
 
 app.listen(3000);
