@@ -64,6 +64,19 @@ function Hist_data() {
         fetchData(search, startTimeFormatted, endTimeFormatted);
     };
 
+    const formatDate = (dateString) => {
+        const options = { 
+            year: 'numeric', 
+            month: '2-digit', 
+            day: '2-digit', 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit', 
+            hour12: false 
+        };
+        return new Date(dateString).toLocaleString('en-GB', options).replace(',', '');
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -76,7 +89,7 @@ function Hist_data() {
         <div>
             <h1>Historical Data Page</h1>
             <div>
-            <label>ID Voi:</label>
+                <label>ID Voi:</label>
                 <input 
                     type="text" 
                     value={search} 
@@ -138,7 +151,7 @@ function Hist_data() {
                         <tr key={row.id_voi + row.thoi_gian}>
                             <td>{row.id_voi}</td>
                             <td>{row.ma_lan_bom}</td>
-                            <td>{new Date(row.thoi_gian).toLocaleString()}</td>
+                            <td>{formatDate(row.thoi_gian)}</td>
                             <td>{row.gia_ban}</td>
                             <td>{row.tong_da_bom}</td>
                             <td>{row.tien_ban}</td>
