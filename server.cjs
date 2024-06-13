@@ -46,13 +46,7 @@ app.use(session({
 
 new Router(app, db);
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-    return res.json("From backend")
-});
-
-
-app.get('/app/hist_data', (req, res) => {
+app.get('/api/hist_data', (req, res) => {
     const { id_voi, start_time, end_time } = req.query;
     let query = 'SELECT id_voi, ma_lan_bom, thoi_gian, gia_ban, tong_da_bom, tien_ban FROM gaspump_hist WHERE 1=1';
     const params = [];
@@ -83,6 +77,18 @@ app.get('/app/hist_data', (req, res) => {
         }
     });
 });
+
+// Serve index.html for client-side routing, except for API routes
+app.get('*', (req, res) => {
+    const apiRoutes = ['/api/hist_data'];
+    if (!apiRoutes.includes(req.path)) {
+        res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    } else {
+        res.status(404).send('Not Found');
+    }
+});
+
+
 
 
 

@@ -21,7 +21,7 @@ function Hist_data() {
         setError(null);
 
         let query = `?id_voi=${id_voi}&start_time=${start_time}&end_time=${end_time}`;
-        fetch(`/app/hist_data${query}`)
+        fetch(`/api/hist_data${query}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
