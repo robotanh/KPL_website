@@ -1,3 +1,4 @@
+// Hist_data.jsx
 import React, { useState, useEffect } from 'react';
 import '../styles/Hist_data.css'; 
 import InputField from '../login_logout_components/InputField'
@@ -14,6 +15,7 @@ function Hist_data() {
     const [endTime, setEndTime] = useState('');
     const [warning, setWarning] = useState('');
     const [offset, setOffset] = useState(0);
+    const [exportFormat, setExportFormat] = useState('csv');
     const limit = 50;  // Number of records to fetch per page
 
     useEffect(() => {
@@ -68,6 +70,40 @@ function Hist_data() {
         fetchData(search, startDate, startTime, endDate, endTime, 0);
     };
 
+    const handleExport = () => {
+        let startTimeFormatted = '';
+        let endTimeFormatted = '';
+
+        if (startDate && startTime) {
+            startTimeFormatted = `${startDate.split('/').reverse().join('-')}T${startTime}`;
+        }
+
+        if (endDate && endTime) {
+            endTimeFormatted = `${endDate.split('/').reverse().join('-')}T${endTime}`;
+        }
+
+        let query = `?id_voi=${search}&start_time=${startTimeFormatted}&end_time=${endTimeFormatted}&format=${exportFormat}`;
+        fetch(`/api/export${query}`)
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                }
+                throw new Error('Network response was not ok');
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', `data.${exportFormat}`);
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+            })
+            .catch(error => {
+                setError(error);
+            });
+    };
+
     const formatDate = (dateString) => {
         const options = { 
             year: 'numeric', 
@@ -104,7 +140,6 @@ function Hist_data() {
             <div className='Hist_data_page'>
                 <h1>Historical Data Page</h1>
                 <div>
-                    
                     <label>ID Voi:</label>
                     <input 
                         type="text" 
@@ -150,7 +185,13 @@ function Hist_data() {
                     </div>
                     {warning && <div style={{color: 'red'}}>{warning}</div>}
                     <button onClick={handleSearch}>Search</button>
-
+                </div>
+                <div>
+                    <select value={exportFormat} onChange={(e) => setExportFormat(e.target.value)}>
+                        <option value="csv">Export as CSV</option>
+                        <option value="xlsx">Export as XLSX</option>
+                    </select>
+                    <button onClick={handleExport}>Export</button>
                 </div>
                 <table className="hist-table">
                     <thead>
