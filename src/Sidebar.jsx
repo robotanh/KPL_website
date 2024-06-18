@@ -31,6 +31,12 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
           </Link>
         </li>
 
+        <Link to="/app/dashboard">
+          <li className='sidebar-list-item'>
+              <BsGrid1X2Fill className='icon' /> Bảng điều khiển
+          </li>
+        </Link>
+
         {/* HISTORICAL DATA */}
         <li className="sidebar-list-item">
           <Link to="/app/hist_data">

@@ -47,27 +47,28 @@ app.use(session({
 new Router(app, db);
 
 app.get('/api/hist_data', (req, res) => {
-    const { id_voi, start_time, end_time } = req.query;
+    const { id_voi, start_time, end_time, limit = 50, offset = 0 } = req.query;
     let query = 'SELECT id_voi, ma_lan_bom, thoi_gian, gia_ban, tong_da_bom, tien_ban FROM gaspump_hist WHERE 1=1';
     const params = [];
-    
+
     if (id_voi) {
         query += ' AND id_voi = ?';
         params.push(id_voi);
     }
-    
+
     if (start_time) {
         query += ' AND thoi_gian >= ?';
         params.push(start_time);
     }
-    
+
     if (end_time) {
         query += ' AND thoi_gian <= ?';
         params.push(end_time);
     }
-    
-    query += ' ORDER BY thoi_gian ASC';
-    
+
+    query += ' ORDER BY thoi_gian ASC LIMIT ? OFFSET ?';
+    params.push(parseInt(limit), parseInt(offset));
+
     db.query(query, params, (err, results) => {
         if (err) {
             console.error('Error fetching data: ', err);
@@ -77,6 +78,7 @@ app.get('/api/hist_data', (req, res) => {
         }
     });
 });
+
 
 // Serve index.html for client-side routing, except for API routes
 app.get('*', (req, res) => {
