@@ -1,3 +1,4 @@
+/* Default dark theme */
 body {
   margin: 0;
   padding: 0;
@@ -32,7 +33,7 @@ body {
   cursor: pointer;
 }
 
-.grid-container {
+.grid-container.dark {
   display: grid;
   grid-template-columns: 260px 1fr 1fr 1fr;
   grid-template-rows: auto 1fr; /* Allow the main area to grow */
@@ -41,9 +42,25 @@ body {
     'sidebar main main main';
   height: 100vh;
   overflow-y: auto; /* Allow scrolling */
+  background: linear-gradient(135deg, #1c1c1c 0%, #2c2c2c 100%);
+  color: #e0c97f; /* Lighter gold text */
 }
 
-/* Header */
+/* Bright theme */
+.grid-container.bright {
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr; /* Allow the main area to grow */
+  grid-template-areas:
+    'sidebar header header header'
+    'sidebar main main main';
+  height: 100vh;
+  overflow-y: auto; /* Allow scrolling */
+  background: linear-gradient(135deg, #f9f9f9 0%, #eaeaea 100%);
+  color: #333; /* Dark text */
+}
+
+/* Shared styles for both themes */
 .header {
   grid-area: header;
   height: 60px;
@@ -52,24 +69,33 @@ body {
   justify-content: space-between;
   padding: 0 30px;
   box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
-  background: linear-gradient(135deg, #333333 0%, #444444 100%); /* Gradient header background */
-  color: #e0c97f; /* Lighter gold text */
+}
+
+.header.dark {
+  background: linear-gradient(135deg, #333333 0%, #444444 100%);
+}
+
+.header.bright {
+  background: linear-gradient(135deg, #dcdcdc 0%, #f0f0f0 100%);
 }
 
 .menu-icon {
   display: none;
 }
 
-/* End Header */
-
-/* Sidebar */
 #sidebar {
   grid-area: sidebar;
   height: 100%;
-  background: linear-gradient(135deg, #222222 0%, #333333 100%); /* Gradient sidebar background */
   overflow-y: auto;
   transition: all 0.5s;
-  -webkit-transition: all 0.5s;
+}
+
+#sidebar.dark {
+  background: linear-gradient(135deg, #222222 0%, #333333 100%);
+}
+
+#sidebar.bright {
+  background: linear-gradient(135deg, #e0e0e0 0%, #f7f7f7 100%);
 }
 
 .sidebar-title {
@@ -78,7 +104,6 @@ body {
   align-items: center;
   padding: 15px 30px 0px 30px;
   margin-bottom: 30px;
-  color: #e0c97f; /* Lighter gold text */
 }
 
 .sidebar-title > span {
@@ -89,7 +114,6 @@ body {
   margin-top: 15px;
   font-size: 20px;
   font-weight: 700;
-  color: #e0c97f; /* Lighter gold text */
 }
 
 .sidebar-list {
@@ -100,7 +124,6 @@ body {
 .sidebar-list-item {
   padding: 20px;
   font-size: 18px;
-  color: #e0c97f; /* Lighter gold text */
 }
 
 .sidebar-list-item:hover {
@@ -110,36 +133,25 @@ body {
 
 .sidebar-list-item > a {
   text-decoration: none;
-  color: #e0c97f; /* Lighter gold text */
 }
 
 .sidebar-responsive {
   display: inline !important;
   position: absolute;
-  /*
-    we want the z-index of the sidebar higher so that
-    the charts are not showing over the sidebar 
-    on small screens
-  */
   z-index: 12 !important;
 }
 
-/* End Sidebar */
-
-/* Main */
 .main-container {
   height: 750px;
   width: 800px;
   grid-area: main;
   padding: 20px;
-  color: #e0c97f; /* Lighter gold text */
   overflow-y: auto; /* Ensure the main container can scroll */
 }
 
 .main-title {
   display: flex;
   justify-content: space-between;
-  color: #e0c97f; /* Lighter gold text */
 }
 
 .main-cards {
@@ -155,8 +167,16 @@ body {
   justify-content: space-around;
   padding: 8px 15px;
   border-radius: 5px;
+}
+
+.card.dark{
   color: #1a1a1a; /* Dark text for card content */
-  background: linear-gradient(135deg, #b8860b 0%, #e0c97f 100%); /* Gradient card background */
+  background: linear-gradient(135deg, #b8860b 0%, #e0c97f 100%);
+}
+
+.card.bright {
+  color: #333; /* Dark text for card content */
+  background: linear-gradient(135deg, #adadad 0%, #ffffff 100%);
 }
 
 .card-inner {
@@ -176,9 +196,6 @@ body {
   margin-top: 60px;
 }
 
-/* End Main */
-
-/* Medium <= 992px */
 @media screen and (max-width: 992px) {
   .grid-container {
     grid-template-columns: 1fr;
@@ -201,7 +218,6 @@ body {
   }
 }
 
-/* Small <= 768px */
 @media screen and (max-width: 768px) {
   .main-cards {
     grid-template-columns: 1fr;
@@ -215,7 +231,6 @@ body {
   }
 }
 
-/* Extra Small <= 576px */
 @media screen and (max-width: 576px) {
   .header-left {
     display: none;

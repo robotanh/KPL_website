@@ -1,0 +1,39 @@
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #e0c97f; /* Lighter gold text */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .settings.dark {
+    background-color: #1c1c1c; /* Dark background */
+  }
+  
+  .settings.bright {
+    background-color: #f0f0f0; /* Bright background */
+    color: #1a1a1a; /* Dark text for bright theme */
+  }
+  
+  .settings h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .settings button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background-color: #e0c97f; /* Lighter gold */
+    color: #1a1a1a; /* Dark text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .settings button:hover {
+    background-color: #c6a84b; /* Darker gold on hover */
+  }
+  

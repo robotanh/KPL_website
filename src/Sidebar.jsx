@@ -15,53 +15,51 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
   };
 
   return (
-    <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive" : ""}>
-      <div className='sidebar-title'>
-        <div className='sidebar-brand'>
-          <BsCart3 className='icon_header' /> SHOP
+    <aside id="sidebar" className={`${openSidebarToggle ? 'sidebar-responsive' : ''} ${document.body.className}`}>
+      <div className="sidebar-title">
+        <div className="sidebar-brand">
+          <BsCart3 className="icon_header" /> SHOP
         </div>
-        <span className='icon close_icon' onClick={OpenSidebar}>X</span>
+        <span className="icon close_icon" onClick={OpenSidebar}>X</span>
       </div>
 
-      <ul className='sidebar-list'>
-
+      <ul className="sidebar-list">
         {/* DASHBOARD */}
-        <li className='sidebar-list-item'>
+        <li className="sidebar-list-item">
           <Link to="/app/dashboard">
-            <BsGrid1X2Fill className='icon' /> Bảng điều khiển
+            <BsGrid1X2Fill className="icon" /> Bảng điều khiển
           </Link>
         </li>
 
         {/* HISTORICAL DATA */}
-        <li className='sidebar-list-item'>
+        <li className="sidebar-list-item">
           <Link to="/app/hist_data">
-            <BsFillArchiveFill className='icon' /> Truy xuất dữ liệu
+            <BsFillArchiveFill className="icon" /> Truy xuất dữ liệu
           </Link>
         </li>
 
-
-        <li className='sidebar-list-item'>
-          <a href="">
-            <BsFillGrid3X3GapFill className='icon' /> Hướng dẫn sử dụng
+        <li className="sidebar-list-item">
+          <a href="#">
+            <BsFillGrid3X3GapFill className="icon" /> Hướng dẫn sử dụng
           </a>
         </li>
-        <li className='sidebar-list-item'>
-          <a href="">
-            <BsPeopleFill className='icon' /> Hỗ trợ khách hàng
+        <li className="sidebar-list-item">
+          <a href="#">
+            <BsPeopleFill className="icon" /> Hỗ trợ khách hàng
           </a>
         </li>
-        <li className='sidebar-list-item'>
-          <a href="">
-            <BsFillGearFill className='icon' /> Cài đặt
-          </a>
+        <li className="sidebar-list-item">
+          <Link to="/app/settings">
+            <BsFillGearFill className="icon" /> Cài đặt
+          </Link>
         </li>
       </ul>
 
       {/* LOGOUT BUTTON */}
-      <div className='logout-btn'>
+      <div className="logout-btn">
         <SubmitButton
           className="log-out-btn"
-          text={'Log out'}
+          text="Log out"
           disabled={false}
           onClick={handleLogout}
         />
