@@ -1,4 +1,23 @@
 /* Hist_data.css */
+
+.Hist_data_page{
+    width: 100%;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #222;
+    color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    
+    border: 5px solid;
+    text-align: center;
+}
+.Hist_data_page h1{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #e0c97f;
+}
+
 .hist-table {
     width: 100%;
     border-collapse: collapse;
@@ -9,9 +28,9 @@
 
 .hist-table th, .data-table td {
     padding: 12px 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #ffffff;
 }
 
 .hist-table th {
-    background-color: #f2f2f2;
+    background-color: #e0c97f;
 }
