@@ -1,36 +1,76 @@
-/* Hist_data.css */
-
-.Hist_data_page{
-    width: 100%;
-    margin: 100px auto;
+.Hist_data_page {
     padding: 20px;
-    background-color: #222;
-    color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    
-    border: 5px solid;
-    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-.Hist_data_page h1{
-    text-align: center;
-    margin-bottom: 20px;
-    color: #e0c97f;
+
+.Hist_data_page.dark {
+    background-color: #1c1c1c; /* Dark background */
+    color: #e0c97f; /* Lighter gold text */
+}
+
+.Hist_data_page.bright {
+    background-color: #f0f0f0; /* Bright background */
+    color: #1a1a1a; /* Dark text for bright theme */
+}
+
+.Hist_data_page h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.Hist_data_page label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.Hist_data_page input,
+.Hist_data_page select,
+.Hist_data_page button {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.Hist_data_page input:focus,
+.Hist_data_page select:focus,
+.Hist_data_page button:focus {
+    outline: none;
+    border-color: #e0c97f; /* Lighter gold */
+}
+
+.Hist_data_page button {
+    background-color: #e0c97f; /* Lighter gold */
+    color: #1a1a1a; /* Dark text */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.Hist_data_page button:hover {
+    background-color: #c6a84b; /* Darker gold on hover */
 }
 
 .hist-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 18px;
-    text-align: left;
+    margin-top: 1rem;
 }
 
-.hist-table th, .data-table td {
-    padding: 12px 15px;
-    border: 1px solid #ffffff;
+.hist-table th,
+.hist-table td {
+    padding: 0.5rem;
+    text-align: left;
+    border: 1px solid #ccc;
 }
 
 .hist-table th {
-    background-color: #e0c97f;
+    background-color: #e0c97f; /* Lighter gold */
+    color: #1a1a1a; /* Dark text */
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
 }

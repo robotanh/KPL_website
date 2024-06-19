@@ -1,10 +1,9 @@
-// Hist_data.jsx
 import React, { useState, useEffect } from 'react';
 import '../styles/Hist_data.css'; 
 import InputField from '../login_logout_components/InputField'
 import SubmitButton from '../login_logout_components/SubmitButton';
 
-function Hist_data() {
+function Hist_data({ theme }) { // Receive theme prop
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -136,91 +135,89 @@ function Hist_data() {
     }
 
     return (
-        <div id='root'>
-            <div className='Hist_data_page'>
-                <h1>Historical Data Page</h1>
+        <div className={`Hist_data_page ${theme}`}> {/* Apply theme class */}
+            <h1>Historical Data Page</h1>
+            <div>
+                <label>ID Voi:</label>
+                <input 
+                    type="text" 
+                    value={search} 
+                    onChange={handleSearchChange} 
+                    placeholder="Search by ID Voi" 
+                />
                 <div>
-                    <label>ID Voi:</label>
+                    <label>Start Date (dd/mm/yyyy):</label>
                     <input 
                         type="text" 
-                        value={search} 
-                        onChange={handleSearchChange} 
-                        placeholder="Search by ID Voi" 
+                        value={startDate} 
+                        onChange={(e) => setStartDate(e.target.value)} 
+                        placeholder="dd/mm/yyyy" 
                     />
-                    <div>
-                        <label>Start Date (dd/mm/yyyy):</label>
-                        <input 
-                            type="text" 
-                            value={startDate} 
-                            onChange={(e) => setStartDate(e.target.value)} 
-                            placeholder="dd/mm/yyyy" 
-                        />
-                    </div>
-                    <div>
-                        <label>Start Time (hh:mm:ss):</label>
-                        <input 
-                            type="text" 
-                            value={startTime} 
-                            onChange={(e) => setStartTime(e.target.value)} 
-                            placeholder="hh:mm:ss" 
-                        />
-                    </div>
-                    <div>
-                        <label>End Date (dd/mm/yyyy):</label>
-                        <input 
-                            type="text" 
-                            value={endDate} 
-                            onChange={(e) => setEndDate(e.target.value)} 
-                            placeholder="dd/mm/yyyy" 
-                        />
-                    </div>
-                    <div>
-                        <label>End Time (hh:mm:ss):</label>
-                        <input 
-                            type="text" 
-                            value={endTime} 
-                            onChange={(e) => setEndTime(e.target.value)} 
-                            placeholder="hh:mm:ss" 
-                        />
-                    </div>
-                    {warning && <div style={{color: 'red'}}>{warning}</div>}
-                    <button onClick={handleSearch}>Search</button>
                 </div>
                 <div>
-                    <select value={exportFormat} onChange={(e) => setExportFormat(e.target.value)}>
-                        <option value="csv">Export as CSV</option>
-                        <option value="xlsx">Export as XLSX</option>
-                    </select>
-                    <button onClick={handleExport}>Export</button>
+                    <label>Start Time (hh:mm:ss):</label>
+                    <input 
+                        type="text" 
+                        value={startTime} 
+                        onChange={(e) => setStartTime(e.target.value)} 
+                        placeholder="hh:mm:ss" 
+                    />
                 </div>
-                <table className="hist-table">
-                    <thead>
-                        <tr>
-                            <th>ID Voi</th>
-                            <th>Mã Lần Bơm</th>
-                            <th>Thời Gian</th>
-                            <th>Giá Bán</th>
-                            <th>Tổng Đã Bơm</th>
-                            <th>Tiền Bán</th>
+                <div>
+                    <label>End Date (dd/mm/yyyy):</label>
+                    <input 
+                        type="text" 
+                        value={endDate} 
+                        onChange={(e) => setEndDate(e.target.value)} 
+                        placeholder="dd/mm/yyyy" 
+                    />
+                </div>
+                <div>
+                    <label>End Time (hh:mm:ss):</label>
+                    <input 
+                        type="text" 
+                        value={endTime} 
+                        onChange={(e) => setEndTime(e.target.value)} 
+                        placeholder="hh:mm:ss" 
+                    />
+                </div>
+                {warning && <div style={{color: 'red'}}>{warning}</div>}
+                <button onClick={handleSearch}>Search</button>
+            </div>
+            <div>
+                <select value={exportFormat} onChange={(e) => setExportFormat(e.target.value)}>
+                    <option value="csv">Export as CSV</option>
+                    <option value="xlsx">Export as XLSX</option>
+                </select>
+                <button onClick={handleExport}>Export</button>
+            </div>
+            <table className="hist-table">
+                <thead>
+                    <tr>
+                        <th>ID Voi</th>
+                        <th>Mã Lần Bơm</th>
+                        <th>Thời Gian</th>
+                        <th>Giá Bán</th>
+                        <th>Tổng Đã Bơm</th>
+                        <th>Tiền Bán</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map(row => (
+                        <tr key={row.id_voi + row.thoi_gian}>
+                            <td>{row.id_voi}</td>
+                            <td>{row.ma_lan_bom}</td>
+                            <td>{formatDate(row.thoi_gian)}</td>
+                            <td>{row.gia_ban}</td>
+                            <td>{row.tong_da_bom}</td>
+                            <td>{row.tien_ban}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {data.map(row => (
-                            <tr key={row.id_voi + row.thoi_gian}>
-                                <td>{row.id_voi}</td>
-                                <td>{row.ma_lan_bom}</td>
-                                <td>{formatDate(row.thoi_gian)}</td>
-                                <td>{row.gia_ban}</td>
-                                <td>{row.tong_da_bom}</td>
-                                <td>{row.tien_ban}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <div className="pagination">
-                    <button onClick={handlePrevious} disabled={offset === 0}>Previous</button>
-                    <button onClick={handleNext} disabled={data.length < limit}>Next</button>
-                </div>
+                    ))}
+                </tbody>
+            </table>
+            <div className="pagination">
+                <button onClick={handlePrevious} disabled={offset === 0}>Previous</button>
+                <button onClick={handleNext} disabled={data.length < limit}>Next</button>
             </div>
         </div>
     );

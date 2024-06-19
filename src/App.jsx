@@ -29,7 +29,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/dashboard" element={<RT_Dashboard theme={theme} />}  />
-          <Route path="/hist_data" element={<Hist_data />} />
+          <Route path="/hist_data" element={<Hist_data theme={theme} />} />
           <Route path="/settings" element={<Settings toggleTheme={toggleTheme} theme={theme}/>} />
         </Routes>
       </main>
