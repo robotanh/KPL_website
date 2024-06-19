@@ -1,4 +1,3 @@
-// server.cjs
 const express = require('express');
 const path = require('path');
 const mysql = require('mysql');
@@ -45,9 +44,23 @@ app.use(session({
     cookie: {
         maxAge: (1825 * 86400 * 1000),
         httpOnly: false
-}}));
+    }
+}));
 
 new Router(app, db);
+
+// Authentication middleware
+function checkAuth(req, res, next) {
+    if (req.session.userID) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
+// Protect /app and /app/* routes
+app.use('/app', checkAuth);
+app.use('/app/*', checkAuth);
 
 app.get('/api/hist_data', (req, res) => {
     const { id_voi, start_time, end_time, limit = 50, offset = 0 } = req.query;

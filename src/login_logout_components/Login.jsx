@@ -1,4 +1,3 @@
-// Login.jsx
 import React from 'react';
 import { observer } from 'mobx-react';
 import { useNavigate } from 'react-router-dom';
@@ -7,8 +6,6 @@ import LoginForm from './LoginForm';
 import SubmitButton from './SubmitButton';
 import '../styles/Login.css';
 
-
-
 const Login = observer(() => {
   const navigate = useNavigate();
 
@@ -16,11 +13,8 @@ const Login = observer(() => {
     UserStore.checkLoggedInStatus();
   }, []);
 
-  
-
   console.log('Login.jsx: Real value of UserStore.isLoggedIn = ', UserStore.isLoggedIn);
 
-  
   if (UserStore.isLoggedIn) {
     navigate('/app');
     return null;  // Return null to avoid rendering the component
@@ -36,4 +30,4 @@ const Login = observer(() => {
   );
 });
 
-export default Login; 
+export default Login;
