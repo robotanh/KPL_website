@@ -16,10 +16,10 @@ app.use(express.json());
 
 // Database
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: '171.232.94.83',
     user: 'remote_user',
     password: 'remote_user',
-    database: 'KPL_Gaspump_DB_test'
+    database: 'KPL_Gaspump_DB'
 });
 
 db.connect(function (err) {
